@@ -27,6 +27,7 @@
 #include "team.h"
 #include "run.h"
 #include "players.h"
+#include "read.h"
 
 #ifdef _OPENMP
 #include "omp.h"
@@ -64,7 +65,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 	bool unique;
 
 	double dif;
-	int days;
+	int days,count;
 	int id,num,year,month,day;
     char buffer[50];
 
@@ -79,6 +80,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 	std::ifstream file0(fname.c_str());
 	num=0;
+    count=0;
 
 	// Find year for standings
 	if (file0.is_open()) {
@@ -175,7 +177,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 					Histogram.insert(pair<string,map<string, vector<double> > >(team, init_hist));
                     
                     Team temp;
-                    temp->second.Load(team,conf,divs);
+                    temp.Load(team,conf,divs);
                     sprintf(buffer,"buffer.%06d.%02d.chk\n",0,count);
                     ofstream out(buffer);
                     temp.write(&out);
@@ -192,7 +194,9 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 			}
 		}
 	}
-    exit(0)
+    exit(0);
+
+/*
 
 	ReadRatingRestart(parms,TeamM,AdjTeamRanks);
 
@@ -327,18 +331,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							}
 
 							if (unique) {
-/*#ifdef _OPENMP
-								#pragma omp parallel for
 
-									for (int q=0; q<(int)AllG.size(); q++) {
-
-										AllG.at(q).push_back(Game());
-										AllG.at(q).back().Load(&TeamM.at(q).find(homeT)->second,&TeamM.at(q).find(awayT)->second,id,today);
-										AllG.at(q).back().GameOver=true; AllG.at(q).back().HomeScore=hrtg; AllG.at(q).back().AwayScore=artg;
-
-
-									}
-#else*/
 								for (int q=0; q<(int)AllG.size(); q++) {
 
 									//AllG.at(q).at(id)=Game(); cout << id%82 << endl;
@@ -348,7 +341,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 								}
 								id += 1;
-//#endif
+
 							}
 
 						} else if (gm.at(0)=="L") {
@@ -388,23 +381,14 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							//vector<double> rtng(rtngs,rtngs+sizeof(rtngs)/sizeof(double));
 							//dnf.Ratings = rtng;
 
-/*#ifdef _OPENMP
-							#pragma omp parallel for
 
-								for (int q=0; q<(int)TeamM.size(); q++) {
-
-									dnf.Opp = &TeamM.at(q).find(homeT)->second;
-									TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
-
-								}
-#else*/
 							for (int q=0; q<(int)TeamM.size(); q++) {
 
 								dnf.Opp = &TeamM.at(q).find(homeT)->second;
 								TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
 
 							}
-//#endif
+
 
 							unique=true;
 							for (int g=0; g<(int)AllG.front().size(); g++) {
@@ -416,18 +400,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							}
 
 							if (unique) {
-/*#ifdef _OPENMP
-								#pragma omp parallel for
 
-									for (int q=0; q<(int)AllG.size(); q++) {
-
-										AllG.at(q).push_back(Game());
-										AllG.at(q).back().Load(&TeamM.at(q).find(homeT)->second,&TeamM.at(q).find(awayT)->second,id,today);
-										AllG.at(q).back().GameOver=true; AllG.at(q).back().HomeScore=hrtg; AllG.at(q).back().AwayScore=artg;
-
-
-									}
-#else*/
 								for (int q=0; q<(int)AllG.size(); q++) {
 
 									//AllG.at(q).at(id)=Game(); cout << id%82 << endl;
@@ -437,7 +410,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 								}
 								id += 1;
-//#endif
+
 							}
 
 
@@ -456,23 +429,14 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							dnf.Opponent = homeT;
 							dnf.IsHome = false;
 
-/*#ifdef _OPENMP
-							#pragma omp parallel for
 
-								for (int q=0; q<(int)TeamM.size(); q++) {
-
-									dnf.Opp = &TeamM.at(q).find(homeT)->second;
-									TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
-
-								}
-#else*/
 							for (int q=0; q<(int)TeamM.size(); q++) {
 
 								dnf.Opp = &TeamM.at(q).find(homeT)->second;
 								TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
 
 							}
-//#endif
+
 
 							unique=true;
 							for (int g=0; g<(int)AllG.front().size(); g++) {
@@ -485,16 +449,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							}
 
 							if (unique) {
-/*#ifdef _OPENMP
-								#pragma omp parallel for
 
-									for (int q=0; q<(int)AllG.size(); q++) {
-
-										AllG.at(q).push_back(Game());
-										AllG.at(q).back().Load(&TeamM.at(q).find(homeT)->second,&TeamM.at(q).find(awayT)->second,id,today);
-
-									}
-#else*/
 								for (int q=0; q<(int)AllG.size(); q++) {
 
 									//AllG.at(q).at(id)=Game(); cout << id%82 << endl;
@@ -503,7 +458,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 								}
 								id += 1;
-//#endif
+
 							}
 						}
 
@@ -546,23 +501,13 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							//vector<double> rtng(rtngs,rtngs+sizeof(rtngs)/sizeof(double));
 							//dnf.Ratings = rtng;
 
-/*#ifdef _OPENMP
-							#pragma omp parallel for
-
-								for (int q=0; q<(int)TeamM.size(); q++) {
-
-									dnf.Opp = &TeamM.at(q).find(awayT)->second;
-									TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
-
-								}
-#else*/
 							for (int q=0; q<(int)TeamM.size(); q++) {
 
 								dnf.Opp = &TeamM.at(q).find(awayT)->second;
 								TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
 
 							}
-//#endif
+
 
 							unique=true;
 							for (int g=0; g<(int)AllG.front().size(); g++) {
@@ -575,17 +520,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							}
 
 							if (unique) {
-/*#ifdef _OPENMP
-								#pragma omp parallel for
 
-									for (int q=0; q<(int)AllG.size(); q++) {
-
-										AllG.at(q).push_back(Game());
-										AllG.at(q).back().Load(&TeamM.at(q).find(homeT)->second,&TeamM.at(q).find(awayT)->second,id,today);
-										AllG.at(q).back().GameOver=true; AllG.at(q).back().HomeScore=hrtg; AllG.at(q).back().AwayScore=artg;
-
-									}
-#else*/
 								for (int q=0; q<(int)AllG.size(); q++) {
 
 									//AllG.at(q).at(id)=Game(); cout << id%82 << endl;
@@ -595,7 +530,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 								}
 								id += 1;
-//#endif
+
 							}
 
 	    				} else if (gm.at(0)=="L") {
@@ -632,23 +567,13 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							//double rtngs[] = {hrtg,artg};
 							//vector<double> rtng(rtngs,rtngs+sizeof(rtngs)/sizeof(double));
 							//dnf.Ratings = rtng;
-/*#ifdef _OPENMP
-							#pragma omp parallel for
 
-								for (int q=0; q<(int)TeamM.size(); q++) {
-
-									dnf.Opp = &TeamM.at(q).find(awayT)->second;
-									TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
-
-								}
-#else*/
 							for (int q=0; q<(int)TeamM.size(); q++) {
 
 								dnf.Opp = &TeamM.at(q).find(awayT)->second;
 								TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
 
 							}
-//#endif
 
 							unique=true;
 							for (int g=0; g<(int)AllG.front().size(); g++) {
@@ -661,17 +586,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							}
 
 							if (unique) {
-/*#ifdef _OPENMP
-								#pragma omp parallel for
 
-									for (int q=0; q<(int)AllG.size(); q++) {
-
-										AllG.at(q).push_back(Game());
-										AllG.at(q).back().Load(&TeamM.at(q).find(homeT)->second,&TeamM.at(q).find(awayT)->second,id,today);
-										AllG.at(q).back().GameOver=true; AllG.at(q).back().HomeScore=hrtg; AllG.at(q).back().AwayScore=artg;
-
-									}
-#else*/
 								for (int q=0; q<(int)AllG.size(); q++) {
 
 									//AllG.at(q).at(id)=Game(); cout << id%82 << endl;
@@ -681,7 +596,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 								}
 								id += 1;
-//#endif
+
 							}
 
 	    				} else {
@@ -698,23 +613,13 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							dnf.Opponent = awayT;
 							dnf.IsHome = true;
 
-/*#ifdef _OPENMP
-							#pragma omp parallel for
 
-								for (int q=0; q<(int)TeamM.size(); q++) {
-
-									dnf.Opp = &TeamM.at(q).find(awayT)->second;
-									TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
-
-								}
-#else*/
 							for (int q=0; q<(int)TeamM.size(); q++) {
 
 								dnf.Opp = &TeamM.at(q).find(awayT)->second;
 								TeamM.at(q).find(team)->second.Schedule.push_back(dnf);
 
 							}
-//#endif
 
 							unique=true;
 							for (int g=0; g<(int)AllG.front().size(); g++) {
@@ -728,16 +633,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 							}
 
 							if (unique) {
-/*#ifdef _OPENMP
-								#pragma omp parallel for
 
-									for (int q=0; q<(int)AllG.size(); q++) {
-
-										AllG.at(q).push_back(Game());
-										AllG.at(q).back().Load(&TeamM.at(q).find(homeT)->second,&TeamM.at(q).find(awayT)->second,id,today);
-
-									}
-#else*/
 								for (int q=0; q<(int)AllG.size(); q++) {
 
 									//AllG.at(q).at(id)=Game(); cout << id%82 << endl;
@@ -746,7 +642,6 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 								}
 								id += 1;
-//#endif
 							}
 
 
@@ -813,7 +708,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 	}
     printf("\n");
-
+*/
 
 	if (parms.debug) { printf("ReadSchedule exiting...\n\n"); }
 
@@ -822,6 +717,7 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 
 	return;
 }
+
 void ReadScheduleClearNew(runparams &parms, vector<map<string, Team> > &TeamM, vector<vector<Game> > &AllG,
 		vector<map<string, vector<double> > > &AdjTeamRanks, map<string, map<string, vector<double> > > &Histogram, string fname) {
 
@@ -1860,12 +1756,12 @@ void ReadInput(runparams &parms) {
 	clock_t endtime=clock();
     parms.tread=double(endtime-starttime)/CLOCKS_PER_SEC;
 }
-void ReadSimulation(vector<vector<Game> > &G, vector<map<string, Team> > &T, vector<map<string,vector<double> > > &AdjTeamRanks,
+void ReadSimulation(vector<vector<string> > &G, vector<map<string, string> > &T, vector<map<string,vector<double> > > &AdjTeamRanks,
 					map<string,map<string, vector<double> > > &Histogram, runparams &parms) {
 
 	if (parms.runtype=="default") { ReadScheduleNew(parms,T,G,AdjTeamRanks,Histogram,parms.filename); }
 
-	else if (parms.runtype=="clear") { ReadScheduleClearNew(parms,T,G,AdjTeamRanks,Histogram,parms.filename); }
+	//else if (parms.runtype=="clear") { ReadScheduleClearNew(parms,T,G,AdjTeamRanks,Histogram,parms.filename); }
 
 }
 

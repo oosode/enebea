@@ -30,7 +30,7 @@ using std::vector;
 using std::ofstream;
 using std::ifstream;
 
-class Team;
+//class Team;
 
 void PerGame(map<string, Team> &TheTeams);
 

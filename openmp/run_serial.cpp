@@ -32,6 +32,7 @@
 #include "histograms.h"
 #include "online.h"
 #include "players.h"
+#include "run.h"
 
 #ifdef _OPENMP
 #include "omp.h"
@@ -220,7 +221,7 @@ void RunSimulation(runparams &parms, vector<vector<string> > &G, vector<map<stri
 
     InitGlobals(parms,T,G,AR);
 	ReadSimulation(G,T,AR,H,parms);
-
+/*
 	clock_t starttime = clock();
 
 	if (parms.debug) { printf("RunSimulation starting...\n"); }
@@ -330,5 +331,5 @@ void RunSimulation(runparams &parms, vector<vector<string> > &G, vector<map<stri
 
     PrintSimulation(parms,T,G,H);
     UinitGlobals(parms,T,G,AR,H,P);
-
+*/
 }

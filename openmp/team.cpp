@@ -13,6 +13,7 @@
 #include <vector>
 #include <iostream>
 #include <time.h>
+#include <fstream>
 
 #include "game.h"
 #include "random.h"
@@ -25,6 +26,8 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::vector;
+using std::ofstream;
+using std::ifstream;
 
 class Game;
 

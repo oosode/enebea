@@ -33,8 +33,6 @@ using std::ofstream;
 using std::ifstream;
 using std::cin;
 
-class Team;
-
 void PerGame(map<string, Team> &TheTeams) {
 
     // league averages
