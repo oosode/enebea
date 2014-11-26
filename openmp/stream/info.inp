@@ -32,8 +32,8 @@ false
 &analysis
 !season download year  2015
 !season download print season.2015.csv
-season update begin 2014-10-28 
-season update end   2014-10-29
+season update begin 2014-10-29 
+season update end   2014-11-01
 season update read  season.2015.csv
 season update print season.updated.csv
 !player update print players.updated.csv
