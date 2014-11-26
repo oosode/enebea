@@ -69,7 +69,7 @@ def runSim(started,num):
 
     ierr=1
     while ierr: 
-      ierr=system("./EnebeaMC < "+f+".inp > "+f+".out")
+      ierr=system("../enebea.exe < "+f+".inp > "+f+".out")
 
     teams=getTeams()
     for team in teams:

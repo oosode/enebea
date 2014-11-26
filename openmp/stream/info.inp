@@ -1,0 +1,59 @@
+&simulation
+run runtype       default
+run ratingfreq    10
+run ratingmin     300
+run ratingmemory  600
+run ratinginit    105.0
+!run ratingrestart restart.2014.csv
+run read          season.updated.csv
+run nsims          5000
+/
+
+&parallel
+4
+/
+
+&print
+histograms
+margins
+averages
+standings
+rankings
+/
+
+&debug
+false
+/
+
+&save
+false
+/
+
+&analysis
+!season download year  2015
+!season download print season.2015.csv
+season update begin 2014-10-28 
+season update end   2014-10-29
+season update read  season.2015.csv
+season update print season.updated.csv
+!player update print players.updated.csv
+!player update read  players.csv
+!player update year  1991
+!player download print players.csv
+!team   update type        rating
+!team   update type        ws
+!team   update type        ws_rating
+!team   update year        2014
+!team   update print       teams.2014.updated.csv
+!team   update read team   teams.2014.csv
+!team   update read player players.updated.csv
+!team   download print teams.2014.csv
+!team   download year  2014
+!team   download read  players.updated.csv
+website basketball-reference.com
+!player analysis print ows.rookies.csv
+!player analysis read  players.new.csv
+!player analysis begin 0
+!player analysis end   5
+!player analysis stat  ows
+/
