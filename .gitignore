@@ -1,0 +1,12 @@
+#ignore all .o files
+*.o
+
+#ignore all ~ temp files
+*~
+
+#ignore all executable files
+*.exe
+
+#ignore all in test and  cproject and project directories 
+test
+Makefile
