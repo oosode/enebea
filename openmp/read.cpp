@@ -48,9 +48,9 @@ using std::transform;
 class Game;
 class Team;
 
-static const string arr10[] = {"DraftPos","Lottery","Seeds","pWins","pLoss","Wins","Loss",
-							   "Division","Conference","League","ORanks","DRanks"};
-vector<string> histvals (arr10,arr10 + sizeof(arr10) / sizeof(arr10[0]));
+//static const string arr10[] = {"DraftPos","Lottery","Seeds","pWins","pLoss","Wins","Loss",
+//							   "Division","Conference","League","ORanks","DRanks"};
+//vector<string> histvals (arr10,arr10 + sizeof(arr10) / sizeof(arr10[0]));
 
 void ReadScheduleNew(runparams &parms, vector<map<string, Team> > &TeamM, vector<vector<Game> > &AllG,
 		vector<map<string, vector<double> > > &AdjTeamRanks, map<string, map<string, vector<double> > > &Histogram, string fname) {

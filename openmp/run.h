@@ -189,7 +189,7 @@ void UinitGlobals(runparams &parms,vector<map<string, Team> > &T, vector<vector<
 
 void RunSimulation(runparams &parms, vector<vector<Game> > &G, vector<map<string, Team> > &T,
 		vector<map<string,vector<double> > > &AdjTeamRanks,map<string,map<string, vector<double> > > &Histogram, vector<Player> &P);
-/*
+
 void InitGlobals(runparams &parms, vector<map<string, string> > &T, vector<vector<string> > &G,
                  vector<map<string, vector<double> > > &AdjTeamRanks);
 
@@ -198,5 +198,5 @@ void UinitGlobals(runparams &parms,vector<map<string, string> > &T, vector<vecto
 
 void RunSimulation(runparams &parms, vector<vector<string> > &G, vector<map<string, string> > &T,
                    vector<map<string,vector<double> > > &AR, map<string,map<string, vector<double> > > &H, vector<Player> &P);
- */
+
 #endif /* RUN_H_ */
