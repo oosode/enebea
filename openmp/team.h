@@ -16,6 +16,7 @@
 #include <vector>
 #include <iostream>
 #include <time.h>
+#include <fstream>
 
 #include "team.h"
 #include "players.h"
@@ -26,6 +27,8 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::vector;
+using std::ofstream;
+using std::ifstream;
 
 class Team;
 
@@ -235,6 +238,8 @@ class Team {
 		void CalcBestPercent();
 		int Rest(const time_t dat);
 		void Distance(double lat1, double lat2, double lon1, double lon2, int i);
+        void read(ifstream *in);
+        void write(ofstream *out);
 
 };
 

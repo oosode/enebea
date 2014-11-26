@@ -925,7 +925,6 @@ void Team::PlayoffAverage() {
 	}
 };
 
-
 void Team::Calculate(int tx) {
 
 	Average();
@@ -933,19 +932,26 @@ void Team::Calculate(int tx) {
 	Shock();
 
 };
-
 void Team::CalculatePlayoffs() {
 
 	PlayoffAverage();
 	PlayoffCalcPercent();
 	Shock();
 
-}
-
+};
 void Team::Calculate() {
 
 	Average();
 	CalcPercent();
 	Shock();
 
+};
+void Team::read(ifstream *in) {
+    
+    in->read((char *) this, sizeof(Team));
+};
+void Team::write(ofstream *out) {
+    
+    out->write((char *) this, sizeof(Team));
+    
 };

@@ -61,5 +61,7 @@ void ReadScheduleClearNew(runparams &parms, vector<map<string, Team> > &TeamM, v
 void ReadSimulation(vector<vector<Game> > &G, vector<map<string, Team> > &T, vector<map<string,vector<double> > > &AdjTeamRanks,
 					map<string,map<string, vector<double> > > &Histogram, runparams &parms);
 
+void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vector<vector<string> > &AllG,
+                     vector<map<string, vector<double> > > &AdjTeamRanks, map<string, map<string, vector<double> > > &Histogram, string fname) {
 
 #endif /* READ_H_ */

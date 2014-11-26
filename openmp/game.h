@@ -30,6 +30,8 @@ using std::vector;
 using std::ofstream;
 using std::ifstream;
 
+class Team;
+
 void PerGame(map<string, Team> &TheTeams);
 
 class Game {
@@ -68,7 +70,7 @@ class Game {
 	    void GameAlreadyFinished(double HomePoints, double AwayPoints, int &hx, int &ax);
 	    void GameFinishedPlayoffs(double HomePoints, double AwayPoints, int &hx, int &ax, int round);
 	    double Uncertainty(int gp);
-            void read(ifstream *in);
+        void read(ifstream *in);
 	    void write(ofstream *out);
  
 };
