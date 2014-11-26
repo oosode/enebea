@@ -16,6 +16,7 @@
 #include <vector>
 #include <iostream>
 #include <time.h>
+#include <fstream>
 
 #include "team.h"
 #include "read.h"
@@ -26,6 +27,8 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::vector;
+using std::ofstream;
+using std::ifstream;
 
 void PerGame(map<string, Team> &TheTeams);
 
@@ -65,7 +68,9 @@ class Game {
 	    void GameAlreadyFinished(double HomePoints, double AwayPoints, int &hx, int &ax);
 	    void GameFinishedPlayoffs(double HomePoints, double AwayPoints, int &hx, int &ax, int round);
 	    double Uncertainty(int gp);
-
+            void read(ifstream *in);
+	    void write(ofstream *out);
+ 
 };
 
 

@@ -308,5 +308,12 @@ double Game::Uncertainty(int gp) {
 	return -2.263*log( (double) gp ) + 10.277;
 
 }
+void Game::read(ifstream *in) {
+  
+        in->read((char *) this, sizeof(Game));  
+};
+void Game::write(ofstream *out) {
 
+        out->write((char *) this, sizeof(Game)); 
 
+};

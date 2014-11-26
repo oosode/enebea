@@ -16,6 +16,7 @@
 #include <limits>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fstream>
 
 #include "random.h"
 #include "game.h"
@@ -44,6 +45,8 @@ using std::endl;
 using std::vector;
 using std::cin;
 using std::clock;
+using std::ofstream;
+using std::ifstream;
 
 void InitParams(runparams &parms) {
 
@@ -293,6 +296,12 @@ void RunSimulation(runparams &parms, vector<vector<Game> > &G, vector<map<string
 
 			G.at(j).at(i).Sim();
 			date=G.at(j).at(i).GameDate;
+
+			char buffer [50];
+                	sprintf(buffer,"output.%05d.%04d.chk",j,i);
+                	ofstream out(buffer);
+                	G.at(j).at(0).write(&out);
+                	out.flush();
 		}
 
 		double qf,qd,qp;
@@ -300,6 +309,12 @@ void RunSimulation(runparams &parms, vector<vector<Game> > &G, vector<map<string
 		Draft(T.at(j),qd,parms.debug);
 		Playoffs(G.at(j),T.at(j),qp,parms.debug);
 
+                char buffer [50];
+		sprintf(buffer,"output%05d",j);
+                ofstream out(buffer);
+                G.at(j).at(0).write(&out);
+                out.flush();
+                
 		parms.tfinal+=qf;
 		parms.tdraft+=qd;
 		parms.tplayoffs+=qp;
