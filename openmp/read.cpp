@@ -79,6 +79,10 @@ void ReadScheduleNew(runparams &parms, vector<map<string, Team> > &TeamM, vector
 	std::ifstream file0(fname.c_str());
 	num=0;
 
+        static const string arr10[] = {"DraftPos","Lottery","Seeds","pWins","pLoss","Wins","Loss",
+                                       "Division","Conference","League","ORanks","DRanks"};
+        vector<string> histvals (arr10,arr10 + sizeof(arr10) / sizeof(arr10[0]));
+
 	// Find year for standings
 	if (file0.is_open()) {
 	    while (file0.good()) {
@@ -841,6 +845,10 @@ void ReadScheduleClearNew(runparams &parms, vector<map<string, Team> > &TeamM, v
 	ifstream file0(fname.c_str());
 	num=0;
 
+        static const string arr10[] = {"DraftPos","Lottery","Seeds","pWins","pLoss","Wins","Loss",
+                                       "Division","Conference","League","ORanks","DRanks"};
+        vector<string> histvals (arr10,arr10 + sizeof(arr10) / sizeof(arr10[0]));
+      
 	// Find year for standings
 	if (file0.is_open()) {
 	    while (file0.good()) {

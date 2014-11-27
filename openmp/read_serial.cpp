@@ -79,6 +79,10 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
 	num=0;
     count=0;
 
+        static const string arr10[] = {"DraftPos","Lottery","Seeds","pWins","pLoss","Wins","Loss",
+                                       "Division","Conference","League","ORanks","DRanks"};
+        vector<string> histvals (arr10,arr10 + sizeof(arr10) / sizeof(arr10[0]));
+
 	// Find year for standings
 	if (file0.is_open()) {
 	    while (file0.good()) {

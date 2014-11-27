@@ -66,8 +66,4 @@ void ReadSimulation(vector<vector<string> > &G, vector<map<string, string> > &T,
 void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vector<vector<string> > &AllG,
                      vector<map<string, vector<double> > > &AdjTeamRanks, map<string, map<string, vector<double> > > &Histogram, string fname);
 
-static const string arr10[] = {"DraftPos","Lottery","Seeds","pWins","pLoss","Wins","Loss",
-    "Division","Conference","League","ORanks","DRanks"};
-vector<string> histvals (arr10,arr10 + sizeof(arr10) / sizeof(arr10[0]));
-
 #endif /* READ_H_ */
