@@ -8,25 +8,26 @@ enebea is a basketball simulator designed to run effectively on parallel
 computers.  
 
 The primary author of the code is Olaseni Sode, who can be emailed
-at olaseni.sode@gmail.com.  The EnebaMC WWW Site at ... has more 
+at olaseni.sode@gmail.com.  The enebea WWW Site at ... has more 
 information about the code and its uses. 
 
 For quick use type './enebea < info.inp' into the commmand line and press enter.
 
-The EnebaMC distribution includes the following files and directories:
+The enebea distribution includes the following files and directories:
 
-README			   this file
-bench			   benchmark problems
-couple			   code coupling examples using EnebaMC as a library
-doc			   documentation
-examples		   simple test problems
-lib			   libraries EnebaMC can be linked with
-src			   source files
-tools			   pre- and post-processing tools
+README			      this file
+bench			        benchmark problems
+openmp            OpenMP parallel implementation
+mpi               MPI parallel implementation 
+stream            production simulations
+doc			          documentation
+examples		      simple test problems
+lib			          libraries enebea can be linked with
+tools			        pre- and post-processing tools
 
 Point your browser at any of these files to get started:
 
-doc/Manual.html	           the EnebaMC manual
-doc/Section_intro.html	   hi-level introduction to EnebaMC
-doc/Section_start.html	   how to build and use EnebaMC
-doc/Developer.pdf          EnebaMC developer guide
+doc/Manual.html	           the enebea manual
+doc/Section_intro.html	   hi-level introduction to enebea
+doc/Section_start.html	   how to build and use enebea
+doc/Developer.pdf          enebea developer guide
