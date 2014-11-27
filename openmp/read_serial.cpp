@@ -179,23 +179,22 @@ void ReadScheduleNew(runparams &parms, vector<map<string, string> > &TeamM, vect
                     
                     Team temp;
                     temp.Load(team,conf,divs);
-                    sprintf(buffer,"buffer.%06d.%02d.chk\n",0,count);
+                    sprintf(buffer,"buffer.%06d.%02d.chk",0,count);
                     ofstream out(buffer);
                     temp.write(&out);
                     out.flush();
                     count++;
                     
-					//TeamM.at(0).insert(pair<string, Team>(team, Team()));
+					TeamM.at(0).insert(pair<string, string>(team, buffer));
 					//TeamM.at(0).find(team)->second.Load(team,conf,divs);
 
-					//AdjTeamRanks.at(0).insert(pair<string, vector<double> >(team, rank));
+					AdjTeamRanks.at(0).insert(pair<string, vector<double> >(team, rank));
 
 
 				}
 			}
 		}
 	}
-    exit(0);
 
 /*
 
@@ -1092,13 +1091,90 @@ void ReadScheduleClearNew(runparams &parms, vector<map<string, Team> > &TeamM, v
 }
 */
 
+void ReadRatingRestart(runparams &parms, vector<map<string, string> > &TeamM, vector<map<string, vector<double> > > &AR) {
+    
+    if (parms.debug) { printf("ReadRatingRestart starting...\n"); }
+    
+    ifstream file1;
+    char buffer[50];
+    
+    vector<string> tmp,tmp0;
+    string line; vector<double> rank(4,0.0);
+    
+    if (!parms.ratingrestart.empty()) {
+        
+        ifstream file1(parms.ratingrestart.c_str());
+        
+        if (file1.is_open()) {
+            while (file1.good()) {
+                
+                getline(file1,line);
+                transform(line.begin(),line.end(),line.begin(),::toupper);
+                
+                StringExplode(line,"\n",&tmp0);
+                StringExplode(tmp0.at(0),",",&tmp);
+                
+                if (tmp.size() > 3) {
+                    
+                    string team = tmp.at(0);
+                    string off = tmp.at(1);
+                    string def = tmp.at(2);
+                    
+                    AR.front().insert(pair<string, vector<double> >(team, rank));
+                    
+                    sprintf(buffer,"%s",TeamM.front().find(team)->second);
+                    ifstream in(buffer);
+                    
+                    Team temp;
+                    temp.read(&in);
+                    
+                    temp.OffRtg=atof(off.c_str());
+                    temp.DefRtg=atof(def.c_str());
+                    
+                    temp.startOffRtg = TeamM.front().find(team)->second.OffRtg;
+                    temp.startDefRtg = TeamM.front().find(team)->second.DefRtg;
+                    
+                    temp.write(&out);
+                    out.flush();
+                    
+                }
+            }
+        }
+        
+    } else if (parms.ratinginit > 0) {
+        
+        file1.clear();
+        
+        typedef map<string, Team>::iterator it_type;
+        for (it_type iterator = TeamM.front().begin(); iterator != TeamM.front().end(); iterator++) {
+            
+            AR.front().insert(pair<string, vector<double> >(iterator->first, rank));
+            
+            ifstream in(iterator->second);
+            Team temp;
+            
+            temp.read(&in);
+            
+            temp.OffRtg=parms.ratinginit;
+            temp.startOffRtg=parms.ratinginit;
+            
+            temp.DefRtg=parms.ratinginit;
+            temp.startDefRtg=parms.ratinginit;
+            
+            temp.write(&out);
+            out.flush();
+            
+        }
+        
+    } else fprintf(stderr, "error: no ratings specified\n\n");
+    
+    if (parms.debug) { printf("ReadRatingRestart exiting...\n\n"); }
+}
 
 void ReadSimulation(vector<vector<string> > &G, vector<map<string, string> > &T, vector<map<string,vector<double> > > &AdjTeamRanks,
 					map<string,map<string, vector<double> > > &Histogram, runparams &parms) {
 
 	if (parms.runtype=="default") { ReadScheduleNew(parms,T,G,AdjTeamRanks,Histogram,parms.filename); }
-
-	//else if (parms.runtype=="clear") { ReadScheduleClearNew(parms,T,G,AdjTeamRanks,Histogram,parms.filename); }
 
 }
 

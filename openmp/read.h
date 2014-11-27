@@ -49,6 +49,7 @@ void ReadInput(vector<string> inp,string &filename,int &nsims,string &runtype,
 void ReadInput(runparams &parms);
 
 void ReadRatingRestart(runparams &parms, vector<map<string, Team> > &TeamM, vector<map<string, vector<double> > > &AdjTeamRanks);
+void ReadRatingRestart(runparams &parms, vector<map<string, string> > &TeamM, vector<map<string, vector<double> > > &AR);
 
 void ReadPlayerRestart(runparams &parms, vector<Player> &P, string fname);
 void ReadPlayerRestartNew(runparams &parms, vector<Player> &P, string fname);

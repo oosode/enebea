@@ -98,14 +98,20 @@ int main(int argc, char* argv[]) {
 	//random number seed
 	seed();
 
-	vector<map<string, Team> > Teams;
-	vector<vector<Game> > Games;
-	vector<map<string, vector<double> > > AdjTeamRanks;
-	map<string, map<string, vector<double> > > Hist;
-	vector<Player> Players;
+//	vector<map<string, Team> > Teams;
+//	vector<vector<Game> > Games;
+//	vector<map<string, vector<double> > > AdjTeamRanks;
+//	map<string, map<string, vector<double> > > Hist;
+//	vector<Player> Players;
+
+        vector<map<string, string> > Teams;
+        vector<vector<string> > Games;
+        vector<map<string, vector<double> > > AdjTeamRanks;
+        map<string, map<string, vector<double> > > Hist;
+        vector<Player> Players;
 
 	// do specified analysis
-	if (parameters.analysis) { RunAnalysis(parameters,Games,Teams,AdjTeamRanks,Hist,Players); }
+	//if (parameters.analysis) { RunAnalysis(parameters,Games,Teams,AdjTeamRanks,Hist,Players); }
 
 	//
 	//if (parameters.simulation) { RunSimulation(parameters,Games,Teams,AdjTeamRanks,Hist,Players); }
