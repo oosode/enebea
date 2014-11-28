@@ -1122,7 +1122,8 @@ void ReadRatingRestart(runparams &parms, vector<map<string, string> > &TeamM, ve
                     
                     AR.front().insert(pair<string, vector<double> >(team, rank));
                     
-                    sprintf(buffer,"%s",TeamM.front().find(team)->second);
+                    sprintf(buffer,"%s",TeamM.front().find(team)->second.c_str());
+		    //printf("%s\n",TeamM.front().find(team)->second.c_str());
                     ifstream in(buffer);
                     
                     Team temp;
@@ -1131,9 +1132,10 @@ void ReadRatingRestart(runparams &parms, vector<map<string, string> > &TeamM, ve
                     temp.OffRtg=atof(off.c_str());
                     temp.DefRtg=atof(def.c_str());
                     
-                    temp.startOffRtg = TeamM.front().find(team)->second.OffRtg;
-                    temp.startDefRtg = TeamM.front().find(team)->second.DefRtg;
-                    
+                    temp.startOffRtg = temp.OffRtg;
+                    temp.startDefRtg = temp.DefRtg;
+                   
+                    ofstream out(buffer); 
                     temp.write(&out);
                     out.flush();
                     
@@ -1145,12 +1147,12 @@ void ReadRatingRestart(runparams &parms, vector<map<string, string> > &TeamM, ve
         
         file1.clear();
         
-        typedef map<string, Team>::iterator it_type;
+        typedef map<string, string>::iterator it_type;
         for (it_type iterator = TeamM.front().begin(); iterator != TeamM.front().end(); iterator++) {
             
             AR.front().insert(pair<string, vector<double> >(iterator->first, rank));
             
-            ifstream in(iterator->second);
+            ifstream in(iterator->second.c_str());
             Team temp;
             
             temp.read(&in);
@@ -1160,7 +1162,8 @@ void ReadRatingRestart(runparams &parms, vector<map<string, string> > &TeamM, ve
             
             temp.DefRtg=parms.ratinginit;
             temp.startDefRtg=parms.ratinginit;
-            
+           
+	    ofstream out(iterator->second.c_str()); 
             temp.write(&out);
             out.flush();
             
