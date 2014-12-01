@@ -8,5 +8,6 @@
 *.exe
 
 #ignore all in test and  cproject and project directories 
+stream
 test
 Makefile
