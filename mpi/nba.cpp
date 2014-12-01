@@ -16,6 +16,7 @@
 #include "input.h"
 #include "game.h"
 #include "team.h"
+#include <unistd.h>
 //#include "fmr_math.h"
 
 using namespace NBA_NS;

@@ -52,10 +52,13 @@ void StringExplode(std::string str, std::string separator, std::vector<std::stri
 			str = str.substr(found+1);
 			found = str.find_first_of(separator);
 		}
-		if (str.length() >= 0)
-		{
+//BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG
+//This if statement may not be necessary
+//		if (str.length() >= 0)
+//		{
 			results->push_back(str);
-		}
+//		}
+//BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG
     }
 }
 #endif /* FUNCTION_H_ */
