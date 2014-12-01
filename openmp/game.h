@@ -33,6 +33,7 @@ using std::ifstream;
 //class Team;
 
 void PerGame(map<string, Team> &TheTeams);
+void PerGame(map<string, string> &TheTeams);
 
 class Game {
 

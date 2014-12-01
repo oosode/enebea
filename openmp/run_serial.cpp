@@ -115,13 +115,13 @@ void RunSimulation(runparams &parms, vector<vector<string> > &G, vector<map<stri
 
     InitGlobals(parms,T,G,AR);
 	ReadSimulation(G,T,AR,H,parms);
-/*
+
 	clock_t starttime = clock();
 
 	if (parms.debug) { printf("RunSimulation starting...\n"); }
 
 	printf("     MAIN| begin simulation\n\n");
-
+/*
 #ifdef _OPENMP
 	#pragma omp parallel for
 		for (int j=0; j<(int)parms.Sim; j++) {
