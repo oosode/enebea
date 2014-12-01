@@ -30,9 +30,11 @@ Season::Season(NBA *nba) : Pointers(nba)
   // Basic initializations
 
   ngames             = 1230;
-  nteams			 = 0;
-  //teams  			 = NULL;
-  //games				 = NULL;
+  nteams	     = 0;
+
+  sprintf(filename, "%s", "season.2015.csv");
+  //teams  	     = NULL;
+  //games	     = NULL;
 
 
 }
@@ -114,6 +116,7 @@ void Season::define()
 	// Find number of games
 	for (int i=0; i<(int)finput.size(); i++)
 	{
+		//printf("INPUT LINE:%02d\n",i);
 		line=finput[i];
 		num+=1;
 		if (line.find("DATE")!=std::string::npos)

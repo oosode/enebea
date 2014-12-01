@@ -54,7 +54,7 @@ void Input::read_input_file()
 	clock_start = MPI_Wtime();
 
 	printf("     INPUT| Reading input file     %55s\n",input_name);
-	printf("INPUT| Reading input file     %55s\n",input_name);
+//	printf("INPUT| Reading input file     %55s\n",input_name);
 
 /*
     FILE *fs = fopen(input_file, "r");

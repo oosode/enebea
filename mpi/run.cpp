@@ -78,6 +78,9 @@ void Run::run_simulation()
   else if (sim_type == RUN_DRAFT_DEFAULT) {
 
   }
+  else if (sim_type == RUN_PLAYOFF_DEFAULT) {
+
+  }
 
   // ** Stop clock ** //
   MPI_Barrier(nba->world);
