@@ -283,7 +283,7 @@ if __name__=="__main__":
 
   #getTeams()
   #readTeamHist("MIA","20131216")
-  beg="2014-11-24"
-  end="2014-11-25"
+  beg="2014-10-28"
+  end="2014-10-29"
   run(beg,end)
 
