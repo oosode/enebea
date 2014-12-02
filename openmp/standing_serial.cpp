@@ -35,204 +35,6 @@ using std::cerr;
 using std::endl;
 using std::vector;
 
-bool TieBreak(Team &TA, Team &TB) {
-
-	double win = 0;
-	double loss = 0;
-
-	// division winner
-	if (TA.Dstand.size() == 0) {
-
-		return true;
-
-	} else if (TB.Dstand.size() == 0) {
-
-		return false;
-
-	} else {
-
-		if (TA.Dstand.back() == 1 && TB.Dstand.back() != 1) {
-
-			return true;
-
-		} else if (TA.Dstand.back() != 1 && TB.Dstand.back() == 1) {
-
-			return false;
-
-		}
-	}
-
-	// head to head win percent
-	for (int i=0; i<(int)TA.Schedule.size(); i++) {
- 
-		if (TA.Schedule.at(i).Opponent==TB.TeamName) {
-		
-			if (TA.Schedule.at(i).DidWin) {
-				
-			    win++;
-
-			} else { 
-			   
-			    loss++;
-
-			}
-		}
-	}
-
-	if (win > loss) {
-
-		return true;
-		
-	} else if (win < loss) {
-
-		return false;
-
-	}
-
-	// conference win loss percent
-	if (TA.ConfWinPercent > TB.ConfWinPercent) {
-
-		return true;
-
-	} else if (TA.ConfWinPercent > TB.ConfWinPercent) {
-
-		return false;
-
-	}
-
-
-	/*
-
-	// own playoff conference win percent
-	if (TA.hBestConfWinPercent > TB.hBestConfWinPercent) {
-
-		return true;
-
-	} else if (TA.hBestConfWinPercent < TB.hBestConfWinPercent) {
-
-		return false;
-
-	}
-
-	// other playoff conference win percent
-	if (TA.aBestConfWinPercent > TB.aBestConfWinPercent) {
-
-		return true;
-
-	} else if (TA.aBestConfWinPercent < TB.aBestConfWinPercent) {
-
-		return false;
-
-	}
-
-	*/
-
-	// net points
-	if (TA.avgP4 > TB.avgP4) {
-
-		return true;
-
-	}
-
-
-    return false;
-}
-
-bool PlayoffTieBreak(Team &TA, Team &TB) {
-
-	//cout << "inside playoff tiebreak" << endl;
-
-	double win = 0;
-	double loss = 0;
-
-	// division winner
-	if (TA.Dstand.back() == 1 && TB.Dstand.back() != 1) { return true; }
-
-    else if (TA.Dstand.back() != 1 && TB.Dstand.back() == 1) { return false; }
-
-	// head to head win percent
-	for (int i=0; i<(int)TA.Schedule.size(); i++) {
-
-		if (TA.Schedule.at(i).Opponent==TB.TeamName) {
-
-			if (TA.Schedule.at(i).DidWin) {
-
-			    win++;
-
-			} else {
-
-			    loss++;
-
-			}
-		}
-	}
-
-	if (win > loss) { return true; }
-
-	else if (win < loss) { return false; }
-
-	// division win percent if in same division
-	if (TA.Division==TB.Division) {
-
-		if (TA.DivWinPercent > TB.DivWinPercent) {
-
-			return true;
-
-		} else if (TA.DivWinPercent > TB.DivWinPercent) {
-
-			return false;
-
-		}
-
-	}
-
-	// conference win loss percent
-	if (TA.ConfWinPercent > TB.ConfWinPercent) {
-
-		return true;
-
-	} else if (TA.ConfWinPercent > TB.ConfWinPercent) {
-
-		return false;
-
-	}
-
-
-	// own playoff conference win percent
-	if (TA.hBestConfWinPercent > TB.hBestConfWinPercent) {
-
-		return true;
-
-	} else if (TA.hBestConfWinPercent < TB.hBestConfWinPercent) {
-
-		return false;
-
-	}
-
-	// other playoff conference win percent
-	if (TA.aBestConfWinPercent > TB.aBestConfWinPercent) {
-
-		return true;
-
-	} else if (TA.aBestConfWinPercent < TB.aBestConfWinPercent) {
-
-		return false;
-
-	}
-
-
-	// net points
-	if (TA.avgP4 > TB.avgP4) {
-
-		return true;
-
-	}
-
-    return false;
-
-
-}
-
 void Standing(map<string, string> &TheTeams) {
 
 	vector<string> League;
@@ -248,33 +50,33 @@ void Standing(map<string, string> &TheTeams) {
 
 	bool edge;
 
-	typedef map<string, Team>::iterator it_type;
+	typedef map<string, string>::iterator it_type;
 	for (it_type iterator = TheTeams.begin(); iterator != TheTeams.end(); iterator++) {
 
         ifstream in(iterator->second.c_str());
-        Team temp;
-        temp.read(&in);
+        Team temp1;
+        temp1.read(&in);
         
 		//League
 		bool lfound = false;
 		for (int i=0; i<(int)League.size(); i++) {
             
             ifstream in(League.at(i))->second.c_str());
-            Team temp1;
-            temp.read(&in);
+            Team temp2;
+            temp2.read(&in);
 
-			if (temp.WinPercent > temp1.WinPercent) {
+			if (temp1.WinPercent > temp2.WinPercent) {
 
-				League.insert(League.begin()+i,temp.TeamName);
+				League.insert(League.begin()+i,temp1.TeamName);
 				lfound = true;
 				break;
 
-			} else if (temp.WinPercent==temp1.WinPercent) {
+			} else if (temp1.WinPercent==temp2.WinPercent) {
 
-				edge = TieBreak(iterator->second,TheTeams.find(League.at(i))->second);
+				edge = TieBreak(temp1,temp2);
 				if (edge) {
 
-				    League.insert(League.begin()+i,iterator->second.TeamName);
+				    League.insert(League.begin()+i,temp1.TeamName);
 				    lfound = true;
 				    break;
 
@@ -284,7 +86,7 @@ void Standing(map<string, string> &TheTeams) {
 		}
 		if (!lfound) {
 
-			League.push_back(iterator->second.TeamName);
+			League.push_back(temp1.TeamName);
 		}
 
 		/*
@@ -296,19 +98,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool efound = false;
 			for (int i=0; i<(int)Eastern.size(); i++) {
+                
+                ifstream in(Eastern.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Eastern.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Eastern.insert(Eastern.begin()+i,iterator->second.TeamName);
+					Eastern.insert(Eastern.begin()+i,temp1.TeamName);
 					efound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Eastern.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Eastern.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Eastern.insert(Eastern.begin()+i,iterator->second.TeamName);
+						Eastern.insert(Eastern.begin()+i,temp1.TeamName);
 						efound = true;
 					    break;
 
@@ -317,7 +123,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!efound) {
 
-				Eastern.push_back(iterator->second.TeamName);
+				Eastern.push_back(temp1.TeamName);
 
 			}
 		}
@@ -331,19 +137,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool wfound = false;
 			for (int i=0; i<(int)Western.size(); i++) {
+                
+                ifstream in(Western.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Western.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Western.insert(Western.begin()+i,iterator->second.TeamName);
+					Western.insert(Western.begin()+i,temp1.TeamName);
 					wfound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Western.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Western.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Western.insert(Western.begin()+i,iterator->second.TeamName);
+						Western.insert(Western.begin()+i,temp1.TeamName);
 						wfound = true;
 						break;
 
@@ -352,7 +162,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!wfound) {
 
-				Western.push_back(iterator->second.TeamName);
+				Western.push_back(temp1.TeamName);
 
 			}
 		}
