@@ -134,7 +134,8 @@ void Season::define()
 				begin = mktime(&tmlol);
 				tm = localtime(&begin);
 
-				for (int j=(int)tmp.size()-1; j>0; j--) if (tmp.at(j).find("DATE")!=std::string::npos) { days=j-1; break; }
+				for (int j=(int)tmp.size()-1; j>0; j--)
+                    if (tmp.at(j).find("DATE")!=std::string::npos) { days=j-1; break; }
 			}
 			else break;
 		}
@@ -147,6 +148,9 @@ void Season::define()
 	define_end = MPI_Wtime();
 	define_time = define_end-define_start;
 	MPI_Barrier(nba->world);
+
+    MPI_Bcast(&nba->season->nteams, 1, MPI_INT, MASTER_RANK, nba->world);
+    MPI_Bcast(&nba->season->days, 1, MPI_INT, MASTER_RANK, nba->world);
 
 	if (nba->master_rank) if (nba->run->debug) printf("season::define finished...\n\n");
 }
@@ -164,11 +168,6 @@ void Season::load()
 	std::string line;
 	std::vector<std::string> tmp;
 	int num;
-	num = 100;
-
-	//fwrite(num);
-
-
 
 /*
 	std::map<std::string, std::vector<std::string> > Standings;
