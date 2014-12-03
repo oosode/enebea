@@ -176,19 +176,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool afound = false;
 			for (int i=0; i<(int)Atlantic.size(); i++) {
+                
+                ifstream in(Atlantic.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Atlantic.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Atlantic.insert(Atlantic.begin()+i,iterator->second.TeamName);
+					Atlantic.insert(Atlantic.begin()+i,temp1.TeamName);
 					afound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Atlantic.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Atlantic.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Atlantic.insert(Atlantic.begin()+i,iterator->second.TeamName);
+						Atlantic.insert(Atlantic.begin()+i,temp1.TeamName);
 						afound = true;
 						break;
 
@@ -197,7 +201,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!afound) {
 
-				Atlantic.push_back(iterator->second.TeamName);
+				Atlantic.push_back(temp1.TeamName);
 
 			}
 		}
@@ -211,19 +215,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool cfound = false;
 			for (int i=0; i<(int)Central.size(); i++) {
+                
+                ifstream in(Central.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Central.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Central.insert(Central.begin()+i,iterator->second.TeamName);
+					Central.insert(Central.begin()+i,temp1.TeamName);
 					cfound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Central.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Central.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Central.insert(Central.begin()+i,iterator->second.TeamName);
+						Central.insert(Central.begin()+i,temp1.TeamName);
 						cfound = true;
 						break;
 
@@ -232,7 +240,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!cfound) {
 
-				Central.push_back(iterator->second.TeamName);
+				Central.push_back(temp1.TeamName);
 
 			}
 		}
@@ -246,19 +254,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool sefound = false;
 			for (int i=0; i<(int)Southeast.size(); i++) {
+                
+                ifstream in(Southeast.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Southeast.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Southeast.insert(Southeast.begin()+i,iterator->second.TeamName);
+					Southeast.insert(Southeast.begin()+i,temp1.TeamName);
 					sefound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Southeast.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Southeast.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Southeast.insert(Southeast.begin()+i,iterator->second.TeamName);
+						Southeast.insert(Southeast.begin()+i,temp1.TeamName);
 						sefound = true;
 						break;
 
@@ -267,7 +279,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!sefound) {
 
-				Southeast.push_back(iterator->second.TeamName);
+				Southeast.push_back(temp1.TeamName);
 
 			}
 		}
@@ -281,19 +293,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool nfound = false;
 			for (int i=0; i<(int)Northwest.size(); i++) {
+                
+                ifstream in(Northwest.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Northwest.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Northwest.insert(Northwest.begin()+i,iterator->second.TeamName);
+					Northwest.insert(Northwest.begin()+i,temp1.TeamName);
 					nfound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Northwest.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Northwest.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Northwest.insert(Northwest.begin()+i,iterator->second.TeamName);
+						Northwest.insert(Northwest.begin()+i,temp1.TeamName);
 						nfound = true;
 						break;
 
@@ -302,7 +318,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!nfound) {
 
-				Northwest.push_back(iterator->second.TeamName);
+				Northwest.push_back(temp1.TeamName);
 
 			}
 		}
@@ -317,19 +333,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool pfound = false;
 			for (int i=0; i<(int)Pacific.size(); i++) {
+                
+                ifstream in(Pacific.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Pacific.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Pacific.insert(Pacific.begin()+i,iterator->second.TeamName);
+					Pacific.insert(Pacific.begin()+i,temp1.TeamName);
 					pfound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Pacific.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Pacific.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Pacific.insert(Pacific.begin()+i,iterator->second.TeamName);
+						Pacific.insert(Pacific.begin()+i,temp1.TeamName);
 						pfound = true;
 						break;
 
@@ -338,7 +358,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!pfound) {
 
-				Pacific.push_back(iterator->second.TeamName);
+				Pacific.push_back(temp2.TeamName);
 
 			}
 		}
@@ -352,19 +372,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool swfound = false;
 			for (int i=0; i<(int)Southwest.size(); i++) {
+                
+                ifstream in(Southwest.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Southwest.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Southwest.insert(Southwest.begin()+i,iterator->second.TeamName);
+					Southwest.insert(Southwest.begin()+i,temp1.TeamName);
 					swfound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Southwest.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Southwest.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Southwest.insert(Southwest.begin()+i,iterator->second.TeamName);
+						Southwest.insert(Southwest.begin()+i,temp1.TeamName);
 						swfound = true;
 						break;
 
@@ -373,7 +397,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!swfound) {
 
-				Southwest.push_back(iterator->second.TeamName);
+				Southwest.push_back(temp1.TeamName);
 
 			}
 		}
@@ -388,19 +412,23 @@ void Standing(map<string, string> &TheTeams) {
 
 			bool mwfound = false;
 			for (int i=0; i<(int)Midwest.size(); i++) {
+                
+                ifstream in(Midwest.at(i))->second.c_str());
+                Team temp2;
+                temp2.read(&in);
 
-				if (iterator->second.WinPercent > TheTeams.find(Midwest.at(i))->second.WinPercent) {
+				if (temp1.WinPercent > temp2.WinPercent) {
 
-					Midwest.insert(Midwest.begin()+i,iterator->second.TeamName);
+					Midwest.insert(Midwest.begin()+i,temp1.TeamName);
 					mwfound = true;
 					break;
 
-				} else if (iterator->second.WinPercent==TheTeams.find(Midwest.at(i))->second.WinPercent) {
+				} else if (temp1.WinPercent==temp2.WinPercent) {
 
-					edge = TieBreak(iterator->second,TheTeams.find(Midwest.at(i))->second);
+					edge = TieBreak(temp1,temp2);
 					if (edge) {
 
-						Midwest.insert(Midwest.begin()+i,iterator->second.TeamName);
+						Midwest.insert(Midwest.begin()+i,temp1.TeamName);
 						mwfound = true;
 						break;
 
@@ -409,7 +437,7 @@ void Standing(map<string, string> &TheTeams) {
 			}
 			if (!mwfound) {
 
-				Midwest.push_back(iterator->second.TeamName);
+				Midwest.push_back(temp1.TeamName);
 
 			}
 		}
