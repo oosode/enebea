@@ -229,26 +229,30 @@ void Season::load()
 	}
 	num=0;
 	//std::ifstream file1(nba->input->season_name);
+	//BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG
+	//hard-coded value
+	std::ifstream file1(filename);
+	//BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG
+	if (file1.is_open()) {
+		while (file1.good()) {
 
-	//if (file1.is_open()) {
-	//	while (file1.good()) {
+			getline(file1,line);
 
-	//		getline(file1,line);
+			transform(line.begin(),line.end(),line.begin(),::toupper);
 
-	//		transform(line.begin(),line.end(),line.begin(),::toupper);
+			if (line.find("DATE")!=std::string::npos) {
+				continue;
 
-	//		if (line.find("DATE")!=std::string::npos) {
-	//			continue;
+			} else {
 
-	//		} else {
+				StringExplode(line,",",&tmp);
+				if (tmp.size() > 2) {
 
-	//			StringExplode(line,",",&tmp);
-	//			if (tmp.size() > 2) {
-
-	//				std::string team = tmp.at(0);
-					//string conf;
-					//string divs;
-					//conference
+					std::string team = tmp.at(0);
+					std::string conf;
+					std::string divs;
+					
+//conference
 
 					/*
 					typedef map<string, vector<string> >::iterator it_type;
@@ -276,10 +280,10 @@ void Season::load()
 					//TeamM.at(0).find(team)->second.Load(team,conf,divs);
 
 
-	//			}
-	//		}
-	//	}
-	//}
+				}
+			}
+		}
+	}
 
 	load_end  = MPI_Wtime();
 	load_time = load_end - load_start;
@@ -740,8 +744,9 @@ void Season::load()
 
 	}
 	printf("\n");
-*/
 
+}
+*/
 void Season::run()
 {
   nba->game->sim();
